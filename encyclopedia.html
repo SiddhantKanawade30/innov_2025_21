@@ -8,21 +8,21 @@
     <style>
         body {
             font-family: 'Lora', serif;
-            background-color: #f8f8f8;
+            background-color: #378f3b;
             margin: 0;
-            padding: 20px;
+            /* padding: 20px; */
         }
         .container {
             max-width: 800px;
             margin: auto;
-            background: white;
+            background: rgb(248, 250, 248);
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
         }
         h1 {
             text-align: center;
-            color: #2c6e49;
+            color: #338033;
             font-family: 'Poppins', sans-serif;
         }
         .herb {
@@ -224,9 +224,89 @@
                 justify-content: center;
             }
         }
+
+        /* Add to your existing styles */
+        .herb-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 800px;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 8px;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideIn 0.3s ease;
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s ease;
+            z-index: 1001;
+        }
+
+        .close-btn:hover {
+            color: #2c6e49;
+        }
+
+        .highlight {
+            background-color: #ffeb3b;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
     </style>
+    <link rel="stylesheet" href="style.css">
+
+    
 </head>
 <body>
+
+    <header>
+        <div class="logo">
+            <i class="fas fa-leaf"></i>
+            <h1>HerbalVista</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="/garden.html">Garden</a></li>
+                <li><a href="/encyclopedia.html">Encyclopedia</a></li>
+                <li><a href="#about">About</a></li>
+                
+                <link rel="stylesheet" href="style.css">
+
+            </ul>
+        </nav>
+    </header>
+
+
     <div class="container">
         <h1>Herbal Encyclopedia</h1>
         <div class="search-bar">
@@ -370,32 +450,42 @@
             const uses = herbElement.querySelector('p:last-of-type').innerText;
             const baseImageName = herbName.split('(')[0].trim().toLowerCase();
 
+            // Image mapping object for each herb with absolute paths
+            const herbImages = {
+                'amla': '/assests/amla.jpeg',
+                'ashwagandha': '/assests/ashwagandha.jpeg',
+                'brahmi': './assests/brahmi.jpeg',
+                'eucalyptus': './assests/eucalyptus.jfif',
+                'ginger': './assests/ginger.jpeg',
+                'mulethi': './assests/mulethi.jpeg',
+                'neem': './assests/neem.jpeg',
+                'shatavari': './assests/shatavari.jfif',
+                'triphala': './assests/triphala.jfif',
+                'tulsi': './assests/tulsi.jpeg',
+                'turmeric': './assests/turmeric.jpeg'
+            };
+
+            // Add debugging to check image path
+            console.log('Base image name:', baseImageName);
+            const herbImage = herbImages[baseImageName] || './assests/placeholder.jpeg';
+            console.log('Loading image from:', herbImage);
+
             // Extract scientific name
             const scientificName = herbName.match(/\((.*?)\)/g).pop().replace(/[()]/g, '');
             
             detailsContainer.innerHTML = `
                 <div class="herb-gallery">
                     <div class="main-image">
-                        <img src="images/herbs/${baseImageName}.jpg" 
+                        <img src="${herbImage}" 
                              alt="${herbName}" 
                              class="herb-image"
-                             onerror="this.src='images/herbs/placeholder.jpg'">
+                             onerror="console.log('Error loading image:', this.src); this.src='../assets/placeholder.jpeg'">
                     </div>
                     <div class="image-thumbnails">
-                        <img src="images/herbs/${baseImageName}.jpg" 
+                        <img src="${herbImage}" 
                              onclick="changeImage(this.src)"
                              class="thumbnail active"
                              alt="Main view">
-                        <img src="images/herbs/${baseImageName}-flower.jpg" 
-                             onclick="changeImage(this.src)"
-                             class="thumbnail"
-                             alt="Flower"
-                             onerror="this.parentElement.removeChild(this)">
-                        <img src="images/herbs/${baseImageName}-leaves.jpg" 
-                             onclick="changeImage(this.src)"
-                             class="thumbnail"
-                             alt="Leaves"
-                             onerror="this.parentElement.removeChild(this)">
                     </div>
                 </div>
                 <div class="herb-info">
