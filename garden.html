@@ -3,153 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Garden</title>
+    <title>garden</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* General Styles */
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-
-        header {
-            position: sticky;
-            top: 0;
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        header .logo {
-            display: flex;
-            align-items: center;
-        }
-
-        header .logo i {
-            font-size: 24px;
-            margin-right: 10px;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 15px;
-            margin: 0;
-            padding: 0;
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-        }
-
-        nav ul li a.active {
-            text-decoration: underline;
-        }
-
-        /* Section Styles */
-        #garden {
-            text-align: center;
-            padding: 40px 20px;
-        }
-
-        #garden h2 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-            color: #2c3e50;
-        }
-
-        #garden p {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            color: #555;
-        }
-
-        .garden-interactive {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .map-container {
-            position: relative;
-            max-width: 800px;
-            margin: 20px auto;
-        }
-
-        .map-container img {
-            width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .region {
-            position: absolute;
-            background-color: rgba(76, 175, 80, 0.8);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: transform 0.2s, background-color 0.2s;
-        }
-
-        .region:hover {
-            transform: scale(1.1);
-            background-color: #388E3C;
-        }
-
-        .region-info {
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .region-info h3 {
-            font-size: 1.5rem;
-            color: #2c3e50;
-        }
-
-        .region-info p {
-            font-size: 1rem;
-            color: #555;
-        }
-
-        /* Button Styles */
-        .cta-button {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            text-decoration: none;
-            font-size: 1rem;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .cta-button:hover {
-            background-color: #388E3C;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .map-container {
-                max-width: 100%;
-            }
-
-            .region {
-                font-size: 0.8rem;
-            }
-        }
-    </style>
 </head>
 <body>
 
@@ -160,34 +15,33 @@
         </div>
         <nav>
             <ul>
-                <li><a href="/index.html">Home</a></li>
+                <li><a href="/index.html" >Home</a></li>
                 <li><a href="/garden.html" class="active">Garden</a></li>
                 <li><a href="/encyclopedia.html">Encyclopedia</a></li>
+                <!-- <li><a href="#about">About</a></li> -->
             </ul>
         </nav>
     </header>
 
     <section id="garden" class="garden-map">
-        <h2>Interactive Garden Map</h2>
-        <p>Click on different regions of the garden to explore medicinal plants based on their native regions.</p>
-        <div class="garden-interactive">
-            <div class="map-container">
-                <div class="region" data-region="north-america" style="top: 20%; left: 25%;">North America</div>
-                <div class="region" data-region="south-america" style="top: 50%; left: 30%;">South America</div>
-                <div class="region" data-region="europe" style="top: 20%; left: 50%;">Europe</div>
-                <div class="region" data-region="asia" style="top: 30%; left: 70%;">Asia</div>
-                <div class="region" data-region="africa" style="top: 50%; left: 50%;">Africa</div>
-                <div class="region" data-region="australia" style="top: 70%; left: 80%;">Australia</div>
-                <div class="region" data-region="antarctica" style="top: 90%; left: 50%;">Antarctica</div>
-                <img src="/assests/photo.jpeg" alt="World map with garden regions" class="garden-map-img">
+            <h2>Interactive Garden Map</h2>
+            <p>Click on different regions of the garden to explore medicinal plants based on their native regions.</p>
+            <br>
+            <div class="garden-interactive">
+                <div class="map-container">
+                    <div class="region" data-region="americas" style="top: 30%; left: 25%;">Americas</div>
+                    <div class="region" data-region="europe" style="top: 20%; left: 50%;">Europe</div>
+                    <div class="region" data-region="asia" style="top: 30%; left: 70%;">Asia</div>
+                    <div class="region" data-region="africa" style="top: 50%; left: 50%;">Africa</div>
+                    <div class="region" data-region="oceania" style="top: 60%; left: 80%;">Oceania</div>
+                    <img src="/assests/worldmap.jpg" alt="World map with garden regions" class="garden-map-img">
+                </div>
+                <div class="region-info">
+                    <h3>Select a region to explore its medicinal plants</h3>
+                    <p>Each region around the world has unique plants with traditional medicinal applications.</p>
+                </div>
             </div>
-            <div class="region-info">
-                <h3>Select a region to explore its medicinal plants</h3>
-                <p>Each region around the world has unique plants with traditional medicinal applications.</p>
-                <a href="/encyclopedia.html" class="cta-button">Explore Encyclopedia</a>
-            </div>
-        </div>
-    </section>
-
+        </section>
+    
 </body>
 </html>

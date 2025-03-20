@@ -1,33 +1,100 @@
-// Plant Database
-const plantDatabase = [
-    {
-        id: "lavender",
-        name: "Lavender",
-        scientificName: "Lavandula angustifolia",
-        region: "europe",
-        climate: "Mediterranean",
-        uses: "Lavender is known for its calming and relaxing properties. It's commonly used to reduce anxiety and emotional stress, improve sleep quality, and alleviate headaches. The essential oil is used in aromatherapy, and the dried flowers can be used in teas, sachets, and bath products.",
-        grow: "Lavender thrives in well-drained soil with full sun exposure. It prefers slightly alkaline soil and moderate watering. Prune after flowering to maintain shape and promote bushier growth. It's drought-tolerant once established.",
-        history: "Lavender has been used for over 2,500 years. Ancient Egyptians used it in mummification and as a perfume. Romans added it to their bathwater for its scent and healing properties. In medieval times, it was considered a herb of love and was used to protect against evil spirits."
+const plantData = {
+    lavender: {
+        name: 'Lavender',
+        scientific: 'Lavandula angustifolia',
+        image: 'assets/lavender.jpg',
+        benefits: [
+            'Reduces anxiety and stress',
+            'Improves sleep quality',
+            'Natural antiseptic',
+            'Helps with headaches'
+        ],
+        growing: 'Lavender needs full sun and well-draining soil. Plant in spring, spacing plants 12 to 18 inches apart. Water deeply but infrequently once established.',
+        uses: 'Traditionally used in aromatherapy, as a sleep aid, and for its calming properties. The essential oil can be used for minor burns and insect bites.'
     },
-    {
-        id: "echinacea",
-        name: "Echinacea",
-        scientificName: "Echinacea purpurea",
-        region: "americas",
-        climate: "Temperate",
-        uses: "Echinacea is primarily known for boosting the immune system and reducing the severity and duration of colds and flu. It's also used to help wound healing, reduce inflammation, and alleviate pain. It can be consumed as a tea, tincture, or supplement.",
-        grow: "Echinacea grows best in well-drained soil with full to partial sun. It's drought-tolerant once established and doesn't require rich soil. Deadhead spent flowers to encourage more blooms and divide plants every few years to maintain vigor.",
-        history: "Native American tribes, including the Lakota and Comanche, used echinacea for hundreds of years before European settlers arrived. They used it to treat wounds, burns, toothaches, sore throats, and insect bites. By the early 1900s, it became a popular remedy in the United States before antibiotics were developed."
+    echinacea: {
+        name: 'Echinacea',
+        scientific: 'Echinacea purpurea',
+        image: 'assets/echinacea.jpg',
+        benefits: [
+            'Boosts immune system',
+            'Reduces inflammation',
+            'Helps fight infections',
+            'May reduce cold symptoms'
+        ],
+        growing: 'Plant in full sun to part shade. Well-draining soil is essential. Space plants 18 to 24 inches apart. Drought tolerant once established.',
+        uses: 'Commonly used to prevent and treat the common cold, flu, and other infections. Also used to boost immune system function.'
     },
-    {
-        id: "chamomile",
-        name: "Chamomile",
-        scientificName: "Matricaria chamomilla",
-        region: "europe",
-        climate: "Temperate",
-        uses: "Chamomile is widely used for its calming effects and is often consumed as a tea to help with sleep and digestion. It also has anti-inflammatory and antiseptic properties, making it useful for treating skin conditions and minor wounds.",
-        grow: "Chamomile grows best in well-drained soil with full sun to partial shade. It is relatively drought-tolerant and can be grown from seeds or transplants. Regular harvesting of the flowers encourages more blooms.",
-        history: "Chamomile has been used for thousands of years by various cultures for its medicinal properties. Ancient Egyptians, Romans, and Greeks used it to treat a variety of ailments, including fever, digestive issues, and skin conditions."
+    chamomile: {
+        name: 'Chamomile',
+        scientific: 'Matricaria chamomilla',
+        image: 'assets/chamomile.jpg',
+        benefits: [
+            'Promotes better sleep',
+            'Aids digestion',
+            'Reduces stress and anxiety',
+            'Anti-inflammatory properties'
+        ],
+        growing: 'Prefers full sun to partial shade. Plant in well-draining soil. Space plants 8 to 12 inches apart. Water regularly until established.',
+        uses: 'Commonly used as a calming tea, for digestive issues, and as a mild sleep aid. Also used topically for skin conditions.'
+    },
+    mint: {
+        name: 'Mint',
+        scientific: 'Mentha',
+        image: 'assets/mint.jpg',
+        benefits: [
+            'Improves digestion',
+            'Freshens breath',
+            'Relieves nausea',
+            'Helps with respiratory issues'
+        ],
+        growing: 'Grows well in partial shade to full sun. Keep soil moist but not waterlogged. Plant in containers to prevent spreading. Very easy to grow.',
+        uses: 'Used in teas for digestive aid, breath freshening, and respiratory support. Essential oil used for headache relief and aromatherapy.'
     }
-];
+};
+
+// Update the popup functionality
+document.querySelectorAll('.plant-card').forEach(card => {
+    const button = card.querySelector('.learn-more-btn');
+    if (button) {
+        button.addEventListener('click', () => {
+            const plantId = card.dataset.id;
+            const plant = plantData[plantId];
+            
+            if (plant) {
+                document.getElementById('popup-image').src = plant.image;
+                document.getElementById('popup-title').textContent = plant.name;
+                document.getElementById('popup-scientific').textContent = plant.scientific;
+                
+                const benefitsList = document.getElementById('popup-benefits');
+                benefitsList.innerHTML = '';
+                plant.benefits.forEach(benefit => {
+                    const li = document.createElement('li');
+                    li.textContent = benefit;
+                    benefitsList.appendChild(li);
+                });
+                
+                document.getElementById('popup-growing').textContent = plant.growing;
+                document.getElementById('popup-uses').textContent = plant.uses;
+                
+                document.getElementById('plantPopup').style.display = 'block';
+            }
+        });
+    }
+});
+
+// Fix close button functionality
+document.querySelector('.close-popup').addEventListener('click', function() {
+    document.getElementById('plantPopup').style.display = 'none';
+});
+
+// Close on outside click
+window.addEventListener('click', function(event) {
+    const popup = document.getElementById('plantPopup');
+    if (event.target === popup) {
+        popup.style.display = 'none';
+    }
+});
+
+
+
