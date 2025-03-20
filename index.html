@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HerbalVista</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="leaf-overlay"></div>
+    
+    <header>
+        <div class="logo">
+            <i class="fas fa-leaf"></i>
+            <h1>HerbalVista</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#garden">Garden</a></li>
+                <li><a href="#encyclopedia">Encyclopedia</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h2>Explore the Healing Power of Nature</h2>
+                <p>Discover a world of medicinal plants and their traditional uses in our interactive virtual garden.</p>
+                <button id="enter-garden" class="cta-button">Enter the Garden</button>
+            </div>
+            <div class="hero-image">
+                <img src="/api/placeholder/500/350" alt="Herbal garden illustration">
+            </div>
+        </section>
+
+        <section id="featured-plants" class="featured">
+            <h2>Featured Medicinal Plants</h2>
+            <div class="plant-carousel">
+                <div class="plant-card" data-id="lavender">
+                    <div class="plant-image">
+                        <img src="/api/placeholder/300/300" alt="Lavender">
+                    </div>
+                    <h3>Lavender</h3>
+                    <p>Known for its calming properties and sweet aroma.</p>
+                </div>
+                <div class="plant-card" data-id="echinacea">
+                    <div class="plant-image">
+                        <img src="/api/placeholder/300/300" alt="Echinacea">
+                    </div>
+                    <h3>Echinacea</h3>
+                    <p>Popular for immune system support and cold prevention.</p>
+                </div>
+                <div class="plant-card" data-id="chamomile">
+                    <div class="plant-image">
+                        <img src="/api/placeholder/300/300" alt="Chamomile">
+                    </div>
+                    <h3>Chamomile</h3>
+                    <p>Used traditionally for relaxation and digestive health.</p>
+                </div>
+                <div class="plant-card" data-id="mint">
+                    <div class="plant-image">
+                        <img src="/api/placeholder/300/300" alt="Mint">
+                    </div>
+                    <h3>Mint</h3>
+                    <p>Refreshing herb that aids digestion and freshens breath.</p>
+                </div>
+            </div>
+            <div class="carousel-controls">
+                <button id="prev-plant"><i class="fas fa-chevron-left"></i></button>
+                <button id="next-plant"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </section>
+
+        <!-- <section id="garden" class="garden-map">
+            <h2>Interactive Garden Map</h2>
+            <p>Click on different regions of the garden to explore medicinal plants based on their native regions.</p>
+            <div class="garden-interactive">
+                <div class="map-container">
+                    <div class="region" data-region="americas" style="top: 30%; left: 25%;">Americas</div>
+                    <div class="region" data-region="europe" style="top: 20%; left: 50%;">Europe</div>
+                    <div class="region" data-region="asia" style="top: 30%; left: 70%;">Asia</div>
+                    <div class="region" data-region="africa" style="top: 50%; left: 50%;">Africa</div>
+                    <div class="region" data-region="oceania" style="top: 60%; left: 80%;">Oceania</div>
+                    <img src="/assests/photo.jpg" alt="World map with garden regions" class="garden-map-img">
+                </div>
+                <div class="region-info">
+                    <h3>Select a region to explore its medicinal plants</h3>
+                    <p>Each region around the world has unique plants with traditional medicinal applications.</p>
+                </div>
+            </div>
+        </section> -->
+
+        <section id="plant-details" class="plant-details hidden">
+            <button class="close-button"><i class="fas fa-times"></i></button>
+            <div class="plant-content">
+                <div class="plant-header">
+                    <img src="/api/placeholder/400/300" alt="Plant image" id="detail-image">
+                    <div class="plant-header-info">
+                        <h2 id="detail-name">Plant Name</h2>
+                        <p id="detail-scientific">Scientific Name</p>
+                        <div class="plant-tags">
+                            <span class="tag" id="detail-region">Region</span>
+                            <span class="tag" id="detail-climate">Climate</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="plant-info-tabs">
+                    <div class="tabs">
+                        <button class="tab-button active" data-tab="uses">Medicinal Uses</button>
+                        <button class="tab-button" data-tab="grow">How to Grow</button>
+                        <button class="tab-button" data-tab="history">History</button>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="uses-content">
+                            <p id="detail-uses">Medicinal uses will appear here.</p>
+                        </div>
+                        <div class="tab-pane" id="grow-content">
+                            <p id="detail-grow">Growing instructions will appear here.</p>
+                        </div>
+                        <div class="tab-pane" id="history-content">
+                            <p id="detail-history">Historical information will appear here.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- <section id="encyclopedia" class="encyclopedia">
+            <h2>Herbal Encyclopedia</h2>
+            <div class="search-filter">
+                <div class="search">
+                    <input type="text" id="plant-search" placeholder="Search for plants...">
+                    <button id="search-button"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="filters">
+                    <select id="filter-region">
+                        <option value="">All Regions</option>
+                        <option value="americas">Americas</option>
+                        <option value="europe">Europe</option>
+                        <option value="asia">Asia</option>
+                        <option value="africa">Africa</option>
+                        <option value="oceania">Oceania</option>
+                    </select>
+                    <select id="filter-property">
+                        <option value="">All Properties</option>
+                        <option value="calming">Calming</option>
+                        <option value="digestive">Digestive</option>
+                        <option value="immune">Immune Support</option>
+                        <option value="pain">Pain Relief</option>
+                        <option value="respiratory">Respiratory</option>
+                    </select>
+                </div>
+            </div>
+            <div class="plant-grid" id="plant-grid">
+                <!-- Plant cards will be dynamically added here -->
+            </div>
+        </section> -->
+
+        <!-- <section id="about" class="about">
+            <h2>About Our Virtual Garden</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Our Virtual Herbal Garden is dedicated to promoting knowledge and appreciation of medicinal plants from around the world. We aim to preserve traditional herbal wisdom while educating about sustainable cultivation practices.</p>
+                    <p>This interactive experience allows you to explore plants based on their native regions, medicinal properties, and cultural significance. We hope to inspire a deeper connection with nature and an understanding of the healing potential of plants.</p>
+                </div>
+                <div class="mission">
+                    <h3>Our Mission</h3>
+                    <ul>
+                        <li>To preserve and share knowledge about traditional medicinal plants</li>
+                        <li>To educate about sustainable harvesting and cultivation practices</li>
+                        <li>To inspire appreciation for the healing potential of nature</li>
+                        <li>To create an accessible resource for herbal medicine enthusiasts</li>
+                    </ul>
+                </div>
+            </div>
+        </section> -->
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fas fa-leaf"></i>
+                <h3>HerbalVista</h3>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#garden">Garden</a></li>
+                    <li><a href="#encyclopedia">Encyclopedia</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+            </div>
+            <div class="footer-newsletter">
+                <h4>Stay Updated</h4>
+                <p>Subscribe to our newsletter for updates on new plants and features</p>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="Your email address">
+                    <button>Subscribe</button>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Virtual Herbal Garden. All plant information is for educational purposes only.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
