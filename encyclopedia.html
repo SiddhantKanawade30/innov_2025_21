@@ -3,25 +3,449 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Encyclopedia</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="Explore our comprehensive herbal encyclopedia with detailed information on medicinal plants and their properties">
+    <title>Herbal Encyclopedia</title>
+    <style>
+        body {
+            font-family: 'Lora', serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c6e49;
+            font-family: 'Poppins', sans-serif;
+        }
+        .herb {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-bottom: 2px solid #ddd;
+            background-color: #eaf4e3;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: block; /* Ensure proper display handling */
+        }
+        h2 {
+            color: #1b4332;
+        }
+        p {
+            margin: 5px 0;
+            line-height: 1.6;
+        }
+        .caution {
+            color: red;
+            font-weight: bold;
+        }
+        .highlight {
+            background-color: #ffeb3b;
+            padding: 2px 0;
+            border-radius: 3px;
+        }
+        .search-bar {
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+        }
+        input[type="text"] {
+            padding: 8px;
+            width: 70%;
+            font-size: 16px;
+        }
+        button {
+            padding: 8px 12px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #2c6e49;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+
+        /* Herb Modal Styles */
+        .herb-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: relative;
+            background-color: white;
+            margin: 5% auto;
+            padding: 20px;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 12px;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .herb-details {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .herb-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .herb-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .herb-category {
+            display: inline-block;
+            padding: 5px 12px;
+            background-color: #eaf4e3;
+            color: #2c6e49;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .info-section {
+            background-color: #f8f8f8;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .info-section h3 {
+            color: #2c6e49;
+            margin-bottom: 10px;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .herb-details {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Add smooth transitions for showing/hiding herbs */
+        #herbList {
+            transition: all 0.3s ease;
+        }
+
+        .herb-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 300px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .main-image img:hover {
+            transform: scale(1.05);
+        }
+
+        .image-thumbnails {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            padding: 0.5rem;
+        }
+
+        .thumbnail {
+            width: 60px;
+            height: 60px;
+            border-radius: 4px;
+            cursor: pointer;
+            object-fit: cover;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .thumbnail:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .thumbnail.active {
+            opacity: 1;
+            border: 2px solid #2c6e49;
+        }
+
+        @media (max-width: 768px) {
+            .image-thumbnails {
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 <body>
-
-    <header>
-        <div class="logo">
-            <i class="fas fa-leaf"></i>
-            <h1>HerbalVista</h1>
+    <div class="container">
+        <h1>Herbal Encyclopedia</h1>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search for herbs...">
+            <button onclick="searchHerbs()">Search</button>
         </div>
-        <nav>
-            <ul>
-                <li><a href="/index.html" >Home</a></li>
-                <li><a href="/garden.html" >Garden</a></li>
-                <li><a href="/encyclopedia.html" class="active">Encyclopedia</a></li>
-                <!-- <li><a href="#about">About</a></li> -->
-            </ul>
-        </nav>
-    </header>
-    
+        <div id="herbList">
+            <div class="herb"><h2>Amla (Indian Gooseberry) (<em>Phyllanthus emblica</em>)</h2><p><strong>Description:</strong> Small tree with greenish-yellow fruits, rich in vitamin C.</p><p><strong>Uses:</strong> Immunity enhancement, antioxidant, digestive health, hair and skin care.</p></div>
+            <div class="herb"><h2>Ashwagandha (<em>Withania somnifera</em>)</h2><p><strong>Description:</strong> Shrub with yellow flowers, used to reduce stress and improve energy levels.</p><p><strong>Uses:</strong> Stress relief, energy boost, sleep improvement, cognitive function.</p></div>
+            <div class="herb"><h2>Brahmi (<em>Bacopa monnieri</em>)</h2><p><strong>Description:</strong> Creeping herb that enhances memory, concentration, and cognitive function.</p><p><strong>Uses:</strong> Memory enhancement, mental clarity, anxiety reduction, improved focus.</p></div>
+            <div class="herb"><h2>Eucalyptus (<em>Eucalyptus globulus</em>)</h2><p><strong>Description:</strong> Tall tree with fragrant leaves, clears nasal congestion.</p><p><strong>Uses:</strong> Respiratory relief, antiseptic, insect repellent.</p></div>
+            <div class="herb"><h2>Ginger (<em>Zingiber officinale</em>)</h2><p><strong>Description:</strong> Pungent rhizome, aids digestion and relieves nausea.</p><p><strong>Uses:</strong> Digestion aid, nausea relief, pain relief.</p></div>
+            <div class="herb"><h2>Mulethi (Licorice Root) (<em>Glycyrrhiza glabra</em>)</h2><p><strong>Description:</strong> Sweet-flavored root, soothes throat and supports respiratory health.</p><p><strong>Uses:</strong> Throat soothing, cough relief, adrenal support.</p></div>
+            <div class="herb"><h2>Neem (<em>Azadirachta indica</em>)</h2><p><strong>Description:</strong> Tree with bitter-tasting leaves, used for blood purification and skin health.</p><p><strong>Uses:</strong> Skin care, infection prevention, dental hygiene, anti-inflammatory.</p></div>
+            <div class="herb"><h2>Shatavari (<em>Asparagus racemosus</em>)</h2><p><strong>Description:</strong> Climbing plant with spiny stems, supports female reproductive health.</p><p><strong>Uses:</strong> Hormonal balance, lactation support, digestive health.</p></div>
+            <div class="herb"><h2>Triphala (<em>Amla, Bibhitaki, Haritaki</em>)</h2><p><strong>Description:</strong> Combination of three fruits, used for digestion and detoxification.</p><p><strong>Uses:</strong> Bowel regulation, antioxidant, gut health.</p></div>
+            <div class="herb"><h2>Tulsi (Holy Basil) (<em>Ocimum sanctum</em>)</h2><p><strong>Description:</strong> Fragrant herb with antiviral and antibacterial properties.</p><p><strong>Uses:</strong> Immunity support, stress reduction, respiratory health.</p></div>
+            <div class="herb"><h2>Turmeric (<em>Curcuma longa</em>)</h2><p><strong>Description:</strong> Rhizome with bright yellow color, potent anti-inflammatory.</p><p><strong>Uses:</strong> Liver health, pain relief, improved digestion.</p></div>
+        </div>
+    </div>
+
+    <div id="herbModal" class="herb-modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div id="herbDetails" class="herb-details">
+                <!-- Content will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function sortHerbList() {
+            const herbList = document.getElementById('herbList');
+            const herbs = Array.from(herbList.getElementsByClassName('herb'));
+            
+            herbs.sort((a, b) => {
+                const nameA = a.querySelector('h2').innerText.split('(')[0].trim().toLowerCase();
+                const nameB = b.querySelector('h2').innerText.split('(')[0].trim().toLowerCase();
+                return nameA.localeCompare(nameB);
+            });
+            
+            herbs.forEach(herb => herbList.appendChild(herb));
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Execute existing sortHerbList
+            sortHerbList();
+            
+            // Add click handlers to all herb entries
+            const herbs = document.querySelectorAll('.herb');
+            herbs.forEach(herb => {
+                herb.style.cursor = 'pointer'; // Make it look clickable
+                herb.addEventListener('click', function() {
+                    showHerbDetails(this);
+                });
+            });
+        });
+
+        // Replace the existing searchHerbs function with this enhanced version
+        function searchHerbs() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let herbs = Array.from(document.querySelectorAll('.herb'));
+            let found = false;
+
+            // Reset previous search results
+            herbs.forEach(herb => {
+                // Only reset highlights in the title
+                const title = herb.querySelector('h2');
+                title.innerHTML = title.innerHTML.replace(/<span class="highlight">(.*?)<\/span>/g, '$1');
+                herb.style.display = 'none';
+            });
+
+            if (input !== "") {
+                // Separate exact matches and partial matches
+                const exactMatches = [];
+                const partialMatches = [];
+
+                herbs.forEach(herb => {
+                    const title = herb.querySelector('h2');
+                    const titleText = title.innerText.split('(')[0].trim().toLowerCase();
+                    const fullHerbText = herb.innerText.toLowerCase();
+
+                    if (titleText.includes(input)) {
+                        exactMatches.push(herb);
+                        found = true;
+                    } else if (fullHerbText.includes(input)) {
+                        partialMatches.push(herb);
+                        found = true;
+                    }
+                });
+
+                // Sort and display exact matches first
+                exactMatches.sort((a, b) => {
+                    const nameA = a.querySelector('h2').innerText.split('(')[0].trim().toLowerCase();
+                    const nameB = b.querySelector('h2').innerText.split('(')[0].trim().toLowerCase();
+                    return nameA.localeCompare(nameB);
+                }).forEach(herb => {
+                    herb.style.display = 'block';
+                    const title = herb.querySelector('h2');
+                    const titleText = title.innerText.split('(')[0].trim();
+                    const regex = new RegExp(`(${input})`, 'gi');
+                    title.innerHTML = title.innerHTML.replace(
+                        titleText,
+                        titleText.replace(regex, '<span class="highlight">$1</span>')
+                    );
+                });
+
+                // Then display partial matches
+                partialMatches.sort((a, b) => {
+                    const nameA = a.querySelector('h2').innerText.split('(')[0].trim().toLowerCase();
+                    const nameB = b.querySelector('h2').innerText.split('(')[0].trim().toLowerCase();
+                    return nameA.localeCompare(nameB);
+                }).forEach(herb => {
+                    herb.style.display = 'block';
+                });
+
+                // If exactly one herb matches, show its details
+                if (exactMatches.length + partialMatches.length === 1) {
+                    showHerbDetails(exactMatches[0] || partialMatches[0]);
+                }
+            } else {
+                // If search is empty, show all herbs in alphabetical order
+                herbs.forEach(herb => herb.style.display = 'block');
+            }
+
+            if (!found && input !== "") {
+                alert("No herbs found matching your search.");
+            }
+        }
+
+        // Add real-time search functionality
+        document.getElementById('searchInput').addEventListener('input', function() {
+            searchHerbs();
+        });
+
+        function showHerbDetails(herbElement) {
+            const modal = document.getElementById('herbModal');
+            const detailsContainer = document.getElementById('herbDetails');
+            const herbName = herbElement.querySelector('h2').innerText;
+            const description = herbElement.querySelector('p:first-of-type').innerText;
+            const uses = herbElement.querySelector('p:last-of-type').innerText;
+            const baseImageName = herbName.split('(')[0].trim().toLowerCase();
+
+            // Extract scientific name
+            const scientificName = herbName.match(/\((.*?)\)/g).pop().replace(/[()]/g, '');
+            
+            detailsContainer.innerHTML = `
+                <div class="herb-gallery">
+                    <div class="main-image">
+                        <img src="images/herbs/${baseImageName}.jpg" 
+                             alt="${herbName}" 
+                             class="herb-image"
+                             onerror="this.src='images/herbs/placeholder.jpg'">
+                    </div>
+                    <div class="image-thumbnails">
+                        <img src="images/herbs/${baseImageName}.jpg" 
+                             onclick="changeImage(this.src)"
+                             class="thumbnail active"
+                             alt="Main view">
+                        <img src="images/herbs/${baseImageName}-flower.jpg" 
+                             onclick="changeImage(this.src)"
+                             class="thumbnail"
+                             alt="Flower"
+                             onerror="this.parentElement.removeChild(this)">
+                        <img src="images/herbs/${baseImageName}-leaves.jpg" 
+                             onclick="changeImage(this.src)"
+                             class="thumbnail"
+                             alt="Leaves"
+                             onerror="this.parentElement.removeChild(this)">
+                    </div>
+                </div>
+                <div class="herb-info">
+                    <h2>${herbName.split('(')[0].trim()}</h2>
+                    <p class="scientific-name"><em>${scientificName}</em></p>
+                    <span class="herb-category">Medicinal Herb</span>
+                    <div class="info-section">
+                        <h3><i class="fas fa-info-circle"></i> Description</h3>
+                        <p>${description.replace('Description:', '').trim()}</p>
+                    </div>
+                    <div class="info-section">
+                        <h3><i class="fas fa-mortar-pestle"></i> Uses</h3>
+                        <p>${uses.replace('Uses:', '').trim()}</p>
+                    </div>
+                </div>
+            `;
+
+            modal.style.display = 'block';
+        }
+
+        function changeImage(newSrc) {
+            const mainImage = document.querySelector('.main-image img');
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            
+            mainImage.src = newSrc;
+            
+            // Update active thumbnail
+            thumbnails.forEach(thumb => {
+                thumb.classList.toggle('active', thumb.src === newSrc);
+            });
+        }
+
+        function closeModal() {
+            document.getElementById('herbModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('herbModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                document.getElementById('herbModal').style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
