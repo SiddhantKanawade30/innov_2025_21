@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>garden</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <i class="fas fa-leaf"></i>
+            <h1>HerbalVista</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/index.html" >Home</a></li>
+                <li><a href="/garden.html" class="active">Garden</a></li>
+                <li><a href="/encyclopedia.html">Encyclopedia</a></li>
+                <!-- <li><a href="#about">About</a></li> -->
+            </ul>
+        </nav>
+    </header>
+
+    <section id="garden" class="garden-map">
+            <h2>Interactive Garden Map</h2>
+            <p>Click on different regions of the garden to explore medicinal plants based on their native regions.</p>
+            <br>
+            <div class="garden-interactive">
+                <div class="map-container">
+                    <div class="region" data-region="americas" style="top: 30%; left: 25%;">Americas</div>
+                    <div class="region" data-region="europe" style="top: 20%; left: 50%;">Europe</div>
+                    <div class="region" data-region="asia" style="top: 30%; left: 70%;">Asia</div>
+                    <div class="region" data-region="africa" style="top: 50%; left: 50%;">Africa</div>
+                    <div class="region" data-region="oceania" style="top: 60%; left: 80%;">Oceania</div>
+                    <img src="/assests/worldmap.jpg" alt="World map with garden regions" class="garden-map-img">
+                </div>
+                <div class="region-info">
+                    <h3>Select a region to explore its medicinal plants</h3>
+                    <p>Each region around the world has unique plants with traditional medicinal applications.</p>
+                </div>
+            </div>
+        </section>
+    
+</body>
+</html>
