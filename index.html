@@ -6,6 +6,9 @@
     <title>HerbalVista</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
 </head>
 <body>
     <div class="leaf-overlay"></div>
@@ -32,13 +35,27 @@
         <section id="home" class="hero">
             <div class="hero-content">
                 <h2>Explore the <br> Healing of Nature</h2>
+                <br>
+                
+                
                 <p>Discover a world of medicinal plants and their traditional uses in our interactive virtual garden.</p>
                 <button id="enter-garden" class="cta-button">Enter the Garden</button>
             </div>
             <div class="hero-image">
-                <!-- <img src="/api/placeholder/500/350" alt="Herbal garden illustration"> -->
-             <div class="sketchfab-embed-wrapper"> <iframe title="The Garden of Words" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share width="900" height="550" src="https://sketchfab.com/models/a03985d746ff4cfcab94521cfd8db441/embed?autostart=1&transparent=1&ui_hint=0"> </iframe> </div>
-            </div>
+                <div class="model" style="width: 100vw; height: 100vh">
+                    <model-viewer
+                      alt="Garden Image"
+                      src="/palmtree.glb"
+                      style="width: 80%; height: 100%; top: 8vh; left: 4vw;"
+                      ar
+                      
+                      poster=""
+                      shadow-intensity="1"
+                      camera-controls
+                      touch-action="pan-y"
+                    ></model-viewer>
+                  </div>
+              
         </section>
 
         <section id="featured-plants" class="featured">
@@ -46,34 +63,38 @@
             <div class="plant-carousel">
                 <div class="plant-card" data-id="lavender">
                     <div class="plant-image">
-                        <img src="assets/lavender.jpg" alt="Lavender">
+                        <img src="/HerbalVista/assets/lavender.jpg" alt="Lavender">
                     </div>
                     <h3>Lavender</h3>
                     <p>Known for its calming properties and sweet aroma.</p>
                     <button class="learn-more-btn">Learn More</button>
+                    
                 </div>
                 <div class="plant-card" data-id="echinacea">
                     <div class="plant-image">
-                        <img src="assets/echinacea.jpg" alt="Echinacea">
+                        <img src="assets/Neem.jpeg" alt="Echinacea">
                     </div>
-                    <h3>Echinacea</h3>
+                    <h3>Neem</h3>
                     <p>Popular for immune system support and cold prevention.</p>
                     <button class="learn-more-btn">Learn More</button>
+                    
                 </div>
                 <div class="plant-card" data-id="chamomile">
                     <div class="plant-image">
-                        <img src="assets/chamomile.jpg" alt="Chamomile">
+                        <img src="assets/alovera.webp" alt="Alovera">
                     </div>
-                    <h3>Chamomile</h3>
-                    <p>Used traditionally for relaxation and digestive health.</p>
+                    <h3>Alovera</h3>
+                    <p>Traditionally, aloev era has been used for wounds 
+
+                    </p>
                     <button class="learn-more-btn">Learn More</button>
                 </div>
                 <div class="plant-card" data-id="mint">
                     <div class="plant-image">
-                        <img src="assets/mint.jpg" alt="Mint">
+                        <img src="assets/tulsi.webp" alt="Tulsi">
                     </div>
-                    <h3>Mint</h3>
-                    <p>Refreshing herb that aids digestion and freshens breath.</p>
+                    <h3>Tulsi</h3>
+                    <p>Herb that inproves immune system </p>
                     <button class="learn-more-btn">Learn More</button>
                 </div>
             </div>
@@ -217,6 +238,28 @@
             <p>&copy; 2025 Virtual Herbal Garden. All plant information is for educational purposes only.</p>
         </div>
     </footer>
+
+    <div id="plantPopup" class="popup">
+        <div class="popup-content">
+            <span class="close-popup">&times;</span>
+            <div class="popup-header">
+                <img id="popup-image" src="" alt="">
+                <h2 id="popup-title"></h2>
+            </div>
+            <div class="popup-body">
+                <div class="popup-info">
+                    <h3>Scientific Name</h3>
+                    <p id="popup-scientific"></p>
+                    <h3>Benefits</h3>
+                    <ul id="popup-benefits"></ul>
+                    <h3>Growing Information</h3>
+                    <p id="popup-growing"></p>
+                    <h3>Traditional Uses</h3>
+                    <p id="popup-uses"></p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div id="plantPopup" class="popup">
         <div class="popup-content">
