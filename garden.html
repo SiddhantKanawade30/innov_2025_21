@@ -172,13 +172,13 @@
         <p>Click on different regions of the garden to explore medicinal plants based on their native regions.</p>
         <div class="garden-interactive">
             <div class="map-container">
-                <div class="region" data-region="north-america" style="top: 20%; left: 25%;">North America</div>
-                <div class="region" data-region="south-america" style="top: 50%; left: 30%;">South America</div>
-                <div class="region" data-region="europe" style="top: 20%; left: 50%;">Europe</div>
-                <div class="region" data-region="asia" style="top: 30%; left: 70%;">Asia</div>
-                <div class="region" data-region="africa" style="top: 50%; left: 50%;">Africa</div>
-                <div class="region" data-region="australia" style="top: 70%; left: 80%;">Australia</div>
-                <div class="region" data-region="antarctica" style="top: 90%; left: 50%;">Antarctica</div>
+                <div class="region" style="top: 20%; left: 25%;" onclick="openPopup('North America')">North America</div>
+                <div class="region" style="top: 50%; left: 30%;" onclick="openPopup('South America')">South America</div>
+                <div class="region" style="top: 20%; left: 50%;" onclick="openPopup('Europe')">Europe</div>
+                <div class="region" style="top: 30%; left: 70%;" onclick="openPopup('Asia')">Asia</div>
+                <div class="region" style="top: 50%; left: 50%;" onclick="openPopup('Africa')">Africa</div>
+                <div class="region" style="top: 70%; left: 80%;" onclick="openPopup('Australia')">Australia</div>
+                <div class="region" style="top: 90%; left: 50%;" onclick="openPopup('Antarctica')">Antarctica</div>
                 <img src="/assests/photo.jpeg" alt="World map with garden regions" class="garden-map-img">
             </div>
             <div class="region-info">
@@ -189,5 +189,125 @@
         </div>
     </section>
 
+    <div class="popup" id="popup" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); align-items: center; justify-content: center;">
+        <div class="popup-content" style="background: white; padding: 30px; border-radius: 15px; max-width: 800px; width: 90%; max-height: 80vh; overflow-y: auto; text-align: left;">
+            <h2 id="popup-title" style="margin-bottom: 20px; color: #2c3e50; text-align: center; font-size: 2em;"></h2>
+            <div id="popup-text" style="margin-bottom: 30px; color: #555; line-height: 1.6;"></div>
+            <button class="close" onclick="closePopup()" style="display: block; margin: 0 auto; padding: 12px 25px; background: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 1.1em;">Close</button>
+        </div>
+    </div>
+
+    <script>
+        const continentData = {
+            'North America': `
+                <h3>Native American Medicinal Plants</h3>
+                <p><strong>Echinacea (Purple Coneflower)</strong>: Used to boost immune system and fight infections</p>
+                <p><strong>Black Cohosh</strong>: Traditional remedy for women's health issues</p>
+                <p><strong>Goldenseal</strong>: Natural antibiotic and immune system booster</p>
+
+                <h3>Eastern Forest Herbs</h3>
+                <p><strong>American Ginseng</strong>: Energy booster and adaptogenic herb</p>
+                <p><strong>Witch Hazel</strong>: Natural astringent for skin care</p>
+
+                <h3>Western Medicinal Plants</h3>
+                <p><strong>California Poppy</strong>: Natural sedative and anxiety reliever</p>
+                <p><strong>Yarrow</strong>: Used for wound healing and fever reduction</p>`,
+
+            'South America': `
+                <h3>Amazon Rainforest Medicine</h3>
+                <p><strong>Cat's Claw</strong>: Anti-inflammatory and immune system booster</p>
+                <p><strong>Pau d'Arco</strong>: Traditional cancer treatment and immune support</p>
+
+                <h3>Andean Healing Plants</h3>
+                <p><strong>Maca Root</strong>: Energy enhancer and hormonal balance</p>
+                <p><strong>Quinine</strong>: Traditional malaria treatment</p>
+
+                <h3>Brazilian Traditional Medicine</h3>
+                <p><strong>Guarana</strong>: Natural stimulant and energy booster</p>
+                <p><strong>Açaí</strong>: Antioxidant-rich superfood</p>`,
+
+            'Europe': `
+                <h3>Mediterranean Herbs</h3>
+                <p><strong>Lavender</strong>: Calming and sleep-promoting properties</p>
+                <p><strong>Rosemary</strong>: Memory enhancement and digestive aid</p>
+
+                <h3>Northern European Plants</h3>
+                <p><strong>St. John's Wort</strong>: Traditional depression treatment</p>
+                <p><strong>Valerian Root</strong>: Natural sleep aid</p>
+
+                <h3>Alpine Medicinal Herbs</h3>
+                <p><strong>Arnica</strong>: Anti-inflammatory and pain relief</p>
+                <p><strong>Gentian</strong>: Digestive aid and appetite stimulant</p>`,
+
+            'Asia': `
+                <h3>Traditional Chinese Medicine</h3>
+                <p><strong>Ginseng</strong>: Energy, vitality, and immune system support</p>
+                <p><strong>Astragalus</strong>: Immune booster and longevity tonic</p>
+
+                <h3>Ayurvedic Herbs (India)</h3>
+                <p><strong>Turmeric</strong>: Anti-inflammatory and antioxidant</p>
+                <p><strong>Ashwagandha</strong>: Stress relief and energy enhancement</p>
+
+                <h3>Japanese & Korean Herbs</h3>
+                <p><strong>Green Tea</strong>: Antioxidant and mental clarity</p>
+                <p><strong>Dong Quai</strong>: Women's health tonic</p>`,
+
+            'Africa': `
+                <h3>North African Medicine</h3>
+                <p><strong>Aloe Vera</strong>: Skin healing and digestive health</p>
+                <p><strong>Black Seed</strong>: Immune system and respiratory health</p>
+
+                <h3>West African Herbs</h3>
+                <p><strong>Bitter Kola</strong>: Anti-inflammatory and antioxidant</p>
+                <p><strong>Yohimbe</strong>: Traditional medicine for various conditions</p>
+
+                <h3>Southern African Plants</h3>
+                <p><strong>Devil's Claw</strong>: Pain relief and anti-inflammatory</p>
+                <p><strong>Rooibos</strong>: Antioxidant-rich therapeutic tea</p>`,
+
+            'Australia': `
+                <h3>Aboriginal Medicine</h3>
+                <p><strong>Tea Tree</strong>: Natural antiseptic and antimicrobial</p>
+                <p><strong>Eucalyptus</strong>: Respiratory health and wound healing</p>
+
+                <h3>Bush Medicine</h3>
+                <p><strong>Kakadu Plum</strong>: Highest natural vitamin C content</p>
+                <p><strong>Emu Bush</strong>: Traditional pain relief</p>
+
+                <h3>Coastal Plants</h3>
+                <p><strong>Lemon Myrtle</strong>: Antimicrobial and aromatic herb</p>
+                <p><strong>Native Mint</strong>: Digestive aid and flavoring</p>`,
+
+            'Antarctica': `
+                <h3>Endemic Species</h3>
+                <p><strong>Antarctic Hair Grass</strong>: One of only two flowering plants native to Antarctica</p>
+                <p><strong>Antarctic Pearlwort</strong>: Studied for extreme climate adaptation</p>
+
+                <h3>Medicinal Lichens</h3>
+                <p><strong>Usnea</strong>: Natural antibiotic properties</p>
+                <p><strong>Xanthoria</strong>: Being studied for potential medicinal properties</p>
+
+                <h3>Research Potential</h3>
+                <p><strong>Extremophile Organisms</strong>: Study of survival mechanisms in extreme conditions</p>
+                <p><strong>Bioactive Compounds</strong>: Research into cold-adapted organisms for medical applications</p>`
+        };
+
+        function openPopup(continent) {
+            const popup = document.getElementById('popup');
+            const title = document.getElementById('popup-title');
+            const text = document.getElementById('popup-text');
+
+            title.innerText = continent;
+            text.innerHTML = continentData[continent];
+            popup.style.display = 'flex';
+        }
+
+        function closePopup() {
+            const popup = document.getElementById('popup');
+            popup.style.display = 'none';
+        }
+    </script>
+
 </body>
 </html>
+
