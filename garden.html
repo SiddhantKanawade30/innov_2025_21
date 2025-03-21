@@ -4,152 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Garden</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        /* General Styles */
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-
-        header {
-            position: sticky;
-            top: 0;
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        header .logo {
-            display: flex;
-            align-items: center;
-        }
-
-        header .logo i {
-            font-size: 24px;
-            margin-right: 10px;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 15px;
-            margin: 0;
-            padding: 0;
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-        }
-
-        nav ul li a.active {
-            text-decoration: underline;
-        }
-
-        /* Section Styles */
-        #garden {
-            text-align: center;
-            padding: 40px 20px;
-        }
-
-        #garden h2 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-            color: #2c3e50;
-        }
-
-        #garden p {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            color: #555;
-        }
-
-        .garden-interactive {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .map-container {
-            position: relative;
-            max-width: 800px;
-            margin: 20px auto;
-        }
-
-        .map-container img {
-            width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .region {
-            position: absolute;
-            background-color: rgba(76, 175, 80, 0.8);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: transform 0.2s, background-color 0.2s;
-        }
-
-        .region:hover {
-            transform: scale(1.1);
-            background-color: #388E3C;
-        }
-
-        .region-info {
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .region-info h3 {
-            font-size: 1.5rem;
-            color: #2c3e50;
-        }
-
-        .region-info p {
-            font-size: 1rem;
-            color: #555;
-        }
-
-        /* Button Styles */
-        .cta-button {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            text-decoration: none;
-            font-size: 1rem;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .cta-button:hover {
-            background-color: #388E3C;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .map-container {
-                max-width: 100%;
-            }
-
-            .region {
-                font-size: 0.8rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/garden.css">
 </head>
 <body>
 
@@ -160,9 +17,10 @@
         </div>
         <nav>
             <ul>
-                <li><a href="/index.html">Home</a></li>
-                <li><a href="/garden.html" class="active">Garden</a></li>
-                <li><a href="/encyclopedia.html">Encyclopedia</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="garden.html" class="active">Garden</a></li>
+                <li><a href="encyclopedia.html">Encyclopedia</a></li>
+                <li><a href="index.html">About</a></li>
             </ul>
         </nav>
     </header>
@@ -172,14 +30,14 @@
         <p>Click on different regions of the garden to explore medicinal plants based on their native regions.</p>
         <div class="garden-interactive">
             <div class="map-container">
-                <div class="region" style="top: 20%; left: 25%;" onclick="openPopup('North America')">North America</div>
-                <div class="region" style="top: 50%; left: 30%;" onclick="openPopup('South America')">South America</div>
-                <div class="region" style="top: 20%; left: 50%;" onclick="openPopup('Europe')">Europe</div>
-                <div class="region" style="top: 30%; left: 70%;" onclick="openPopup('Asia')">Asia</div>
-                <div class="region" style="top: 50%; left: 50%;" onclick="openPopup('Africa')">Africa</div>
-                <div class="region" style="top: 70%; left: 80%;" onclick="openPopup('Australia')">Australia</div>
-                <div class="region" style="top: 90%; left: 50%;" onclick="openPopup('Antarctica')">Antarctica</div>
-                <img src="/assests/photo.jpeg" alt="World map with garden regions" class="garden-map-img">
+                <div class="region" data-region="north-america" style="top: 20%; left: 25%;">North America</div>
+                <div class="region" data-region="south-america" style="top: 50%; left: 30%;">South America</div>
+                <div class="region" data-region="europe" style="top: 20%; left: 50%;">Europe</div>
+                <div class="region" data-region="asia" style="top: 30%; left: 70%;">Asia</div>
+                <div class="region" data-region="africa" style="top: 50%; left: 50%;">Africa</div>
+                <div class="region" data-region="australia" style="top: 70%; left: 80%;">Australia</div>
+                <div class="region" data-region="antarctica" style="top: 90%; left: 50%;">Antarctica</div>
+                <img src="/HerbalVista/assests/photo.jpeg" alt="World map with garden regions" class="garden-map-img">
             </div>
             <div class="region-info">
                 <h3>Select a region to explore its medicinal plants</h3>
@@ -189,145 +47,5 @@
         </div>
     </section>
 
-    <div class="popup" id="popup" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); align-items: center; justify-content: center;">
-        <div class="popup-content" style="background: white; padding: 30px; border-radius: 15px; max-width: 900px; width: 95%; max-height: 85vh; overflow-y: auto; text-align: left;">
-            <h2 id="popup-title" style="margin-bottom: 20px; color: #2c3e50; text-align: center; font-size: 2em;"></h2>
-            <div id="popup-text" style="margin-bottom: 30px; color: #555; line-height: 1.6; display: grid; grid-template-columns: 1fr 1fr; gap: 20px;"></div>
-            <button class="close" onclick="closePopup()" style="display: block; margin: 0 auto; padding: 12px 25px; background: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 1.1em;">Close</button>
-        </div>
-    </div>
-
-    <script>
-        const continentData = {
-            'North America': `
-                <div class="content-section">
-                    <h3>Native American Medicinal Plants</h3>
-                    <p><strong>Echinacea (Purple Coneflower)</strong>: Used to boost immune system and fight infections</p>
-                    <img src="./assests/Echinacea.jfif" alt="Echinacea" style="width: 75%; border-radius: 8px; margin: 10px 0;">
-                    <p><strong>Black Cohosh</strong>: Traditional remedy for women's health issues</p>
-                    <img src="./assests/Black Cohosh.jfif" alt="Black Cohosh" style="width: 75%; border-radius: 8px; margin: 10px 0;">
-                </div>
-                <div class="content-section">
-                    <h3>Eastern Forest Herbs</h3>
-                    <p><strong>American Ginseng</strong>: Energy booster and adaptogenic herb</p>
-                    <img src="./assests/American Ginseng.jfif" alt="American Ginseng" style="width: 75%; border-radius: 8px; margin: 10px 0;">
-                    <p><strong>Witch Hazel</strong>: Natural astringent for skin care</p>
-                    <img src="./assests/Witch Hazel.jfif" alt="Witch Hazel" style="width: 75%; border-radius: 8px; margin: 10px 0;">
-                </div>`,
-
-            'South America': `
-                <div class="content-section">
-                    <h3>Amazon Rainforest Medicine</h3>
-                    <p><strong>Cat's Claw</strong>: Anti-inflammatory and immune system booster</p>
-                    <img src="./assests/Cat's Claw.jfif" alt="Cat's Claw" style="width: 75%; border-radius: 8px; margin: 10px 0;">
-                    <p><strong>Pau d'Arco</strong>: Traditional cancer treatment and immune support</p>
-                    <img src="./assests/Pau d'Arco.jfif" alt="Pau d'Arco" style="width: 75%; border-radius: 8px; margin: 10px 0;">
-                </div>
-                <div class="content-section">
-                    <h3>Brazilian Traditional Medicine</h3>
-                    <p><strong>Guarana</strong>: Natural stimulant and energy booster</p>
-                    <img src="./assests/Guarana.jfif" alt="Guarana" style="width: 75%; border-radius: 8px; margin: 10px 0;">
-                    <p><strong>Açaí</strong>: Antioxidant-rich superfood</p>
-                    <img src="./assests/Açaí.jfif" alt="Açaí" style="width: 75%; border-radius: 8px; margin: 10px 0;">
-                </div>`,
-
-            'Europe': `
-                <div class="content-section">
-                    <h3>Mediterranean Herbs</h3>
-                    <p><strong>Lavender</strong>: Calming and sleep-promoting properties</p>
-                    <img src="./assests/lavender.jfif" alt="Lavender" style="width: 75%; border-radius: 8px; margin: 10px 0;">
-                    <p><strong>Rosemary</strong>: Memory enhancement and digestive aid</p>
-                    <img src="./assests/Rosemary.jfif" alt="Rosemary" style="width: 75%; border-radius: 8px; margin: 10px 0;">
-                </div>
-                <div class="content-section">
-                    <h3>Northern European Plants</h3>
-                    <p><strong>St. John's Wort</strong>: Traditional depression treatment</p>
-                    <img src="./assests/St. John's Wort.jfif" alt="St. John's Wort" style="width: 75%; border-radius: 8px; margin: 10px 0;">
-                    <p><strong>Valerian Root</strong>: Natural sleep aid</p>
-                    <img src="./assests/Valerian.jfif" alt="Valerian" style="width: 75%; border-radius: 8px; margin: 10px 0;">
-                </div>`,
-
-            'Asia': `
-                <div class="content-section">
-                    <h3>Traditional Chinese Medicine</h3>
-                    <p><strong>Ginseng</strong>: Energy, vitality, and immune system support</p>
-                    <img src="./assests/ginseng.webp" alt="Ginseng" style="width: 75%; border-radius: 8px; margin: 10px 0;">
-                    <p><strong>Astragalus</strong>: Immune booster and longevity tonic</p>
-                    <img src="./assests/astragulus.jfif" alt="Astragalus" style="width: 75%; border-radius: 8px; margin: 10px 0;">
-                </div>
-                <div class="content-section">
-                    <h3>Ayurvedic Herbs (India)</h3>
-                    <p><strong>Turmeric</strong>: Anti-inflammatory and antioxidant</p>
-                    <img src="/assests/turmeric.jpeg" alt="Turmeric" style="width: 75%; border-radius: 8px; margin: 10px 0;">
-                    <p><strong>Ashwagandha</strong>: Stress relief and energy enhancement</p>
-                    <img src="./assests/ashwagandha.jpeg" alt="Ashwagandha" style="width: 75%; border-radius: 8px; margin: 10px 0;">
-                </div>`,
-
-            'Africa': `
-                <div class="content-section">
-                    <h3>North African Medicine</h3>
-                    <p><strong>Aloe Vera</strong>: Skin healing and digestive health</p>
-                    <img src="./assests/Aloe Vera.jfif" alt="Aloe Vera" style="width: 75%; border-radius: 8px; margin: 10px 0;">
-                    <p><strong>Black Seed</strong>: Immune system and respiratory health</p>
-                    <img src="./assests/Black Seed.jfif" alt="Black Seed" style="width: 75%; border-radius: 8px; margin: 10px 0;">
-                </div>
-                <div class="content-section">
-                    <h3>Southern African Plants</h3>
-                    <p><strong>Devil's Claw</strong>: Pain relief and anti-inflammatory</p>
-                    <img src="./assests/Devil's Claw.jpg" alt="Devil's Claw" style="width: 75%; border-radius: 8px; margin: 10px 0;">
-                    <p><strong>Rooibos</strong>: Antioxidant-rich therapeutic tea</p>
-                    <img src="./assests/Rooibos.jfif" alt="Rooibos" style="width: 75%; border-radius: 8px; margin: 10px 0;">
-                </div>`,
-
-            'Australia': `
-                <div class="content-section">
-                    <h3>Aboriginal Medicine</h3>
-                    <p><strong>Tea Tree</strong>: Natural antiseptic and antimicrobial</p>
-                    <img src="./assests/teatree.jfif" alt="Tea Tree" style="width: 75%; border-radius: 8px; margin: 10px 0;">
-                    <p><strong>Eucalyptus</strong>: Respiratory health and wound healing</p>
-                    <img src="./assests/eucalyptus.jfif" alt="Eucalyptus" style="width: 75%; border-radius: 8px; margin: 10px 0;">
-                </div>
-                <div class="content-section">
-                    <h3>Bush Medicine</h3>
-                    <p><strong>Kakadu Plum</strong>: Highest natural vitamin C content</p>
-                    <img src="./assests/Kakadu Plum.jfif" alt="Kakadu Plum" style="width: 75%; border-radius: 8px; margin: 10px 0;">
-                    <p><strong>Lemon Myrtle</strong>: Antimicrobial and aromatic herb</p>
-                    <img src="./assests/Lemon Myrtle.jfif" alt="Lemon Myrtle" style="width: 75%; border-radius: 8px; margin: 10px 0;">
-                </div>`,
-
-            'Antarctica': `
-                <div class="content-section">
-                    <h3>Endemic Species</h3>
-                    <p><strong>Antarctic Hair Grass</strong>: One of only two flowering plants native to Antarctica</p>
-                    <img src="./assests/Antarctic Hair Grass.jfif" alt="Antarctic Hair Grass" style="width: 75%; border-radius: 8px; margin: 10px 0;">
-                    <p><strong>Antarctic Pearlwort</strong>: Studied for extreme climate adaptation</p>
-                    <img src="./assests/Antarctic Pearlwort.jfif" alt="Antarctic Pearlwort" style="width: 75%; border-radius: 8px; margin: 10px 0;">
-                </div>
-                <div class="content-section">
-                    <h3>Medicinal Lichens</h3>
-                    <p><strong>Usnea</strong>: Natural antibiotic properties</p>
-                    <img src="./assests/Usnea.jfif" alt="Usnea" style="width: 75%; border-radius: 8px; margin: 10px 0;">
-                    <p><strong>Xanthoria</strong>: Being studied for potential medicinal properties</p>
-                    <img src="./assests/Xanthoria.jfif" alt="Xanthoria" style="width: 75%; border-radius: 8px; margin: 10px 0;">
-                </div>`
-        };
-
-        function openPopup(continent) {
-            const popup = document.getElementById('popup');
-            const title = document.getElementById('popup-title');
-            const text = document.getElementById('popup-text');
-
-            title.innerText = continent;
-            text.innerHTML = continentData[continent];
-            popup.style.display = 'flex';
-        }
-
-        function closePopup() {
-            const popup = document.getElementById('popup');
-            popup.style.display = 'none';
-        }
-    </script>
-
 </body>
 </html>
-

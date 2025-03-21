@@ -5,7 +5,7 @@ const plantData = {
         embedCode: '<div class="model" style="width: 60vw; height: 50vh">' +
         '<model-viewer' +
         '  alt="Lavender Plant 3D Model"' +
-        '  src="/lavender.glb"' +
+        '  src="/3Dobjects/lavender.glb"' +
         '  style="width: 100%; height: 100%;"' +
         '  ar' +
         '  poster=""' +
@@ -29,7 +29,7 @@ const plantData = {
         embedCode: '<div class="model" style="width: 60vw; height: 50vh">' +
         '<model-viewer' +
         '  alt="Neem plant 3D model"' +
-        '  src="/neemCompressed.glb"' +
+        '  src="/3Dobjects/neemCompressed.glb"' +
         '  style="width: 100%; height: 100%;"' +
         '  ar' +
         '  poster=""' +
@@ -53,7 +53,7 @@ const plantData = {
         embedCode: '<div class="model" style="width: 60vw; height: 50vh">' +
         '<model-viewer' +
         '  alt="Alovera plant 3D model"' +
-        '  src="/alovera.glb"' +
+        '  src="/3Dobjects/alovera.glb"' +
         '  style="width: 100%; height: 100%;"' +
         '  ar' +
         '  poster=""' +
@@ -78,7 +78,7 @@ const plantData = {
         embedCode: '<div class="model" style="width: 60vw; height: 50vh">' +
         '<model-viewer' +
         '  alt="Tulsi plant 3D model"' +
-        '  src="/tulsi.glb"' +
+        '  src="/3Dobjects/tulsi.glb"' +
         '  style="width: 100%; height: 100%;"' +
         '  ar' +
         '  poster=""' +
